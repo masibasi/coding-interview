@@ -4,6 +4,10 @@
 # bfs로 돌리면서 각각을 어레이에 담고 리스트로 집어넣으면 되지 않을까?
 
 
+from collections import deque
+from typing import List, Optional
+
+
 # Definition for a binary tree node.
 # class TreeNode:
 #     def __init__(self, val=0, left=None, right=None):
