@@ -1,34 +1,48 @@
-# https://leetcode.com/problems/flood-fill/description/
-# 733-flood-fill
+# https://leetcode.com/problems/number-of-islands/
+# 200-number-of-islands
+# Idea :
+# - 뭔가 recursive 하게 1인 값을 찾아떠날 수 있지 않을까
+# - 중요한건 방문한 곳들은 방문했다고 적어야할거같다.
 
 
-# Edge case 생각하기!!
-# - 시작색과 채울색이 같은경우!!
 class Solution:
-    def floodFill(
-        self, image: List[List[int]], sr: int, sc: int, color: int
-    ) -> List[List[int]]:
-        rows = len(image)
-        cols = len(image[0])
-        self.start_col = image[sr][sc]
-        self.color = color
-        if self.start_col == color:
-            return image
+    # def numIslands(self, grid: List[List[str]]) -> int:
+    #     visited = set()
+    #     islands = 0
+    #     def dfs(r,c):
+    #         if r < 0 or r >= rows or c < 0 or c >= cols or grid[r][c] == "0" or (r, c) in visited:
+    #             return
+    #         visited.add((r,c))
+    #         dfs(r+1, c)
+    #         dfs(r, c+1)
+    #         dfs(r-1, c)
+    #         dfs(r, c-1)
+
+    #     rows, cols = len(grid), len(grid[0])
+    #     for row in range(rows):
+    #         for col in range(cols):
+    #             if (row, col) not in visited and grid[row][col] == "1":
+    #                 islands += 1
+    #                 dfs(row,col)
+    #     return islands
+    def numIslands(self, grid: List[List[str]]) -> int:
+        rows, cols = len(grid), len(grid[0])
 
         def dfs(r, c):
-            if (
-                r < 0
-                or r >= rows
-                or c < 0
-                or c >= cols
-                or image[r][c] != self.start_col
-            ):
+            # 범위 벗어나거나 바다(0)이면 stop
+            if r < 0 or r >= rows or c < 0 or c >= cols or grid[r][c] == "0":
                 return
-            image[r][c] = self.color
-            dfs(r, c + 1)
+            grid[r][c] = "0"  # 방문 처리
+            # 상하좌우 탐색
             dfs(r + 1, c)
-            dfs(r, c - 1)
             dfs(r - 1, c)
+            dfs(r, c + 1)
+            dfs(r, c - 1)
 
-        dfs(sr, sc)
-        return image
+        islands = 0
+        for r in range(rows):
+            for c in range(cols):
+                if grid[r][c] == "1":
+                    islands += 1
+                    dfs(r, c)
+        return islands
