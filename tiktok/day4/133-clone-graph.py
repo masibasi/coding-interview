@@ -1,20 +1,30 @@
-# https://leetcode.com/problems/move-zeroes/
-# 283-move-zeroes
+# https://leetcode.com/problems/clone-graph/
+# 133-clone-graph
 
-# Brute force:
-## n^2 
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, val = 0, neighbors = None):
+        self.val = val
+        self.neighbors = neighbors if neighbors is not None else []
+"""
 
-# Optimized - two pointers
-## 
+from typing import Optional
 class Solution:
-    def moveZeroes(self, nums: List[int]) -> None:
-        """
-        Do not return anything, modify nums in-place instead.
-        """
-        left = 0
-        for right, n in enumerate(nums):
-            if n != 0:
-                nums[left], nums[right] = nums[right], nums[left]
-                left += 1
+    def cloneGraph(self, node: Optional['Node']) -> Optional['Node']:
+        if not node:
+            return None
 
-        
+        cloneMap = {}
+
+        def dfs(n):
+            if n in cloneMap:
+                return cloneMap[n]
+
+            copy = Node(n.val)
+            cloneMap[n] = copy
+            for nei in n.neighbors:
+                copy.neighbors.append(dfs(nei))
+            return copy
+
+        return dfs(node)

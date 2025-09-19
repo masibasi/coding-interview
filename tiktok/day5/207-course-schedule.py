@@ -1,29 +1,28 @@
-# https://leetcode.com/problems/invert-binary-tree/
-# 226-invert-binary-tree
-
-# Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, val=0, left=None, right=None):
-#         self.val = val
-#         self.left = left
-#         self.right = right
-
-from collections import deque
+# https://leetcode.com/problems/course-schedule/
+# 207-course-schedule
 
 class Solution:
-    def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
-        if not root:
-            return
-        # root.left, root.right = self.invertTree(root.right), self.invertTree(root.left)
-        q = deque([root])
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        graph = {i:[] for i in range(numCourses)}
+        indegree = [0] * numCourses
+
+        for a, b in prerequisites:
+            graph[b].append(a)
+            indegree[a] += 1
+
+        q = deque([])
+        for i in range(len(indegree)):
+            if indegree[i] == 0:
+                q.append(i)
+
+        taken = 0
 
         while q:
-            for _ in range(len(q)):
-                cur = q.popleft()
-                left, right = cur.right, cur.left
-                cur.left, cur.right = left, right
-                if left:
-                    q.append(left)
-                if right:
-                    q.append(right)
-        return root
+            cur = q.popleft()
+            taken += 1
+            for course in graph[cur]:
+                indegree[course] -= 1
+                if indegree[course] == 0:
+                    q.append(course)
+        
+        return taken == numCourses
