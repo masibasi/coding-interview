@@ -34,3 +34,24 @@ This repo contains my daily interview problem solving progress in preparation fo
 | Day 3 | [Climbing Stairs](../tiktok/day3/070-climbing-stairs.py), [Move Zeroes](../tiktok/day3/283-move-zeroes.py), [Invert Binary Tree](../tiktok/day3/226-invert-binary-tree.py), [Flood Fill](../tiktok/day3/733-flood-fill.py)                                                     | - DP 점화식(`dp[i] = dp[i-1] + dp[i-2]`)으로 계단 문제 해결<br>- Two Pointers로 in-place 배열 조작 패턴 연습<br>- 트리 문제는 DFS로 간단히 풀 수 있음<br>- Grid DFS/BFS에서 경계 조건·방문 체크 타이밍 중요성 체감                                                                                                                                 |
 | Day 4 | [Number of Islands](../tiktok/day4/200-number-of-islands.py), [Rotting Oranges](../tiktok/day4/994-rotting-oranges.py), [01 Matrix](../tiktok/day4/542-01-matrix.py), [Clone Graph](../tiktok/day4/133-clone-graph.py)                                                         | - `Number of Islands`: DFS와 BFS 두 가지 방식 모두 연습, grid 자체 수정 vs visited set 비교<br>- `Rotting Oranges`: Multi-source BFS 패턴, fresh 개수 추적과 `while q and fresh > 0` 조건 중요<br>- `01 Matrix`: 0을 멀티소스로 큐에 넣고 BFS로 거리 갱신, DP 2-pass 풀이도 참고<br>- `Clone Graph`: DFS 재귀 패턴 익힘, dict(old→new) 매핑이 핵심 |
 | Day 5 | [Maximum Subarray](../tiktok/day5/053-maximum-subarray.py), [Merge Intervals](../tiktok/day5/056-merge-intervals.py), [Binary Tree Level Order Traversal](../tiktok/day5/102-binary-tree-level-order-traversal.py), [Course Schedule](../tiktok/day5/207-course-schedule.py)   | - `Maximum Subarray`: Kadane’s Algorithm(`cur_sum < 0`이면 reset), Divide & Conquer도 가능<br>- `Merge Intervals`: 시작점 기준 sort 후 겹치는 구간 병합, `res[-1][1]` 갱신 패턴<br>- `Level Order`: BFS 큐 + level size 패턴, 한 레벨씩 리스트에 추가<br>- `Course Schedule`: Topological Sort(Kahn)로 in-degree 줄이기, 사이클 존재 여부 확인     |
+
+# ✅ Amazon OA Prep Progress
+
+## 📁 Day 1
+
+| Problem               | File                                                                       | Notes                                                                 |
+| --------------------- | -------------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| Subarray Sum Equals K | [560-subarray-sum-equals-k.py](./amazon/day1/560-subarray-sum-equals-k.py) | 누적합 + 해시맵 (prefix sum 활용). 음수 때문에 투포인터는 부적절      |
+| Task Scheduler        | [621-task-scheduler.py](./amazon/day1/621-task-scheduler.py)               | 가장 잦은 task 기준으로 idle 계산: `(max_freq - 1) * (n + 1) + count` |
+
+## 📁 Day 2
+
+| Problem                                         | File                                                                                       | Notes                                                                   |
+| ----------------------------------------------- | ------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------- |
+| Construct Binary Tree from Preorder and Inorder | [105-construct-binary-tree-from-...py](./amazon/day2/105-construct-binary-tree-from-...py) | Preorder는 루트, Inorder는 위치 파악용. 재귀적으로 좌우 트리 재구성     |
+| Gas Station                                     | [134-gas-station.py](./amazon/day2/134-gas-station.py)                                     | Greedy: 전체 잔여연료 < 0이면 불가능. tank가 음수 될 때마다 시작점 갱신 |
+| Majority Element                                | [169-majority-element.py](./amazon/day2/169-majority-element.py)                           | 빈도수가 과반수 초과인 수. Boyer-Moore Voting Algorithm도 가능          |
+| Sort Characters by Frequency                    | [451-sort-characters-by-frequency.py](./amazon/day2/451-sort-characters-by-frequency.py)   | Counter 후 heap 또는 bucket sort 사용하여 정렬                          |
+| Partition Labels                                | [763-partition-labels.py](./amazon/day2/763-partition-labels.py)                           | 각 문자 마지막 인덱스를 기준으로 영역을 나누는 그리디 전략              |
+
+---
