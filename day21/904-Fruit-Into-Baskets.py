@@ -1,19 +1,36 @@
-# https://leetcode.com/problems/top-k-frequent-words/
-#
+#   https://leetcode.com/problems/fruit-into-baskets/
+# 904-Fruit-Into-Baskets
+# two baskets
+# sliding window??
+
+
 class Solution:
-    def topKFrequent(self, words: List[str], k: int) -> List[str]:
-        counter = Counter(words)
+    def totalFruit(self, fruits: List[int]) -> int:
+        l = 0
+        counter = defaultdict(int)
+        type_of_fruit = set()
+        max_fruits = 0
+        cur_fruits = 0
 
-        freq = defaultdict(list)
-        max_heap = []
-        for word, f in counter.items():
-            # freq[f].append(word)
-            max_heap.append((-f, word))
+        for r, fruit in enumerate(fruits):
+            # ADD NEXT FRUIT
+            type_of_fruit.add(fruit)
+            counter[fruit] += 1
+            cur_fruits += 1
 
-        heapq.heapify(max_heap)
+            # if basket is full
+            if len(type_of_fruit) > 2:
+                while True:
+                    r_fruit = fruits[l]
+                    counter[r_fruit] -= 1  # get rid of left fruit
+                    cur_fruits -= 1
+                    l += 1
+                    if counter[r_fruit] == 0:
+                        type_of_fruit.remove(r_fruit)
+                        break
 
-        ans = []
-        for _ in range(k):
-            ans.append(heapq.heappop(max_heap)[1])
+            # if not full
+            else:
+                max_fruits = max(max_fruits, cur_fruits)
 
-        return ans
+        return max_fruits
