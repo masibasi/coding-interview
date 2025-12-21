@@ -1,20 +1,27 @@
-# https://leetcode.com/problems/longest-substring-without-repeating-characters/
-# 3-longest-substring-without-repeating-characters
+# https://leetcode.com/problems/merge-two-sorted-lists/
+# 21-merge-two-sorted-lists
 
 
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
 class Solution:
-    def lengthOfLongestSubstring(self, s: str) -> int:
-        seen = defaultdict(int)
+    def mergeTwoLists(
+        self, list1: Optional[ListNode], list2: Optional[ListNode]
+    ) -> Optional[ListNode]:
+        dummy = ListNode(0)
+        tail = dummy
 
-        l = 0
-
-        ans = 0
-        for r, char in enumerate(s):
-            if char in seen and seen[char] >= l:
-                l = seen[char] + 1
-                seen[char] = r
+        while list1 and list2:
+            if list1.val <= list2.val:
+                tail.next = list1
+                list1 = list1.next
             else:
-                seen[char] = r
-                ans = max(ans, r - l + 1)
+                tail.next = list2
+                list2 = list2.next
+            tail = tail.next
 
-        return ans
+        tail.next = list1 if list1 else list2
+        return dummy.next
