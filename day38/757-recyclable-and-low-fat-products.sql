@@ -1,24 +1,7 @@
-# https://leetcode.com/problems/asteroid-collision/
-# 73-asteroid-collision
+# Write your MySQL query statement below
+# https://leetcode.com/problems/recyclable-and-low-fat-products/
+# 1757-recyclable-and-low-fat-products
 
-
-class Solution:
-    def asteroidCollision(self, asteroids: List[int]) -> List[int]:
-        if len(asteroids) == 0:
-            return None
-
-        stack = [asteroids[0]]
-
-        for i, ast in enumerate(asteroids[1:]):
-            while len(stack) > 0 and stack[-1] * ast < 0 and ast < 0:
-                if abs(stack[-1]) == abs(ast):
-                    stack.pop()
-                    break
-                elif abs(stack[-1]) < abs(ast):
-                    stack.pop()
-                else:
-                    break
-            else:
-                stack.append(ast)
-
-        return stack
+SELECT product_id FROM Products
+where low_fats = 'Y'
+AND   recyclable = 'Y'
