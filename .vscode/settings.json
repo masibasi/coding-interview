@@ -1,0 +1,7 @@
+{
+  "r.lsp.promptToInstall": false,
+  "isort.check": false,
+  "[python]": {
+    "editor.codeActionsOnSave": []
+  }
+}
